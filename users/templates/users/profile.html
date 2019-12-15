@@ -1,9 +1,8 @@
 {% extends 'main_page/main.html' %}
-{%  load crispy_forms_tags %}
+
 {% block main_section %}
   <div class="form-section">
-    <h2>Вы вышли из аккаунта</h2>
-  <a href="{% url 'log' %}">Войти в личный кабинет</a>
+    <h2>{{ user.username }}</h2>
 
   </div>
 {% endblock main_section%}
