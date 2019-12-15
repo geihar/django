@@ -3,5 +3,7 @@ from django.contrib.auth.models import User
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    # img = models.ImageField(default='1.jpg', upload_to='user_images')
-    
+    img = models.ImageField(default='1.jpg', upload_to='user_images')
+
+    def __str__(self):
+        return f'Профиль пользователя {self.user.username}'
