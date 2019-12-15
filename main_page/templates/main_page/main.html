@@ -1,0 +1,56 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'main_page/main.css' %}">
+</head>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-3">
+  <a class="navbar-brand" href="{% url 'main_page' %}">CardisrtyHub</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample05" aria-controls="navbarsExample05" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+    <div class="collapse navbar-collapse" id="navbarsExample05">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="{% url 'main_page' %}">Главная </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'news' %}">Новости</a>
+          </li>
+        </ul>
+    </div>
+    <div class="navbar-nav">
+        <a href="{% url 'reg' %}" class="btn btn-outline-secondary mr-2"> Регистрация</a>
+        <a href="{% url 'log' %}" class="btn btn-outline-secondary"> Войти</a>
+    </div>
+</nav>
+
+<main class="container">
+    <div class="row">
+        <div class="col-md-8">
+        {% if messages %}
+            {%  for mess in messages %}
+                <div class="alert alert-success">
+                {{mess}}
+                </div>
+            {% endfor %}
+        {% endif %}
+
+            {% block main_section %}
+            {% endblock main_section%}
+        </div>
+    <aside class="col-md-4">
+        {% block aside_section %}
+        {% endblock aside_section%}
+    </aside>
+    </div>
+
+
+</main>
+
+
+</html>
