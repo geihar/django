@@ -16,11 +16,12 @@ def registration(request):
         form = UserRegForm()
     return render(request, 'users/registration.html', {'form': form, 'title': 'Регистрация пользователя'})
 
+
 @login_required
 def profile(request):
     if request.method == "POST":
-        img_prolile =ProfileImg(request.POST, request.FILES, instance=request.user.profile)
-        update_user = UserUpdate(request.POST,instance=request.user)
+        img_prolile = ProfileImg(request.POST, request.FILES, instance=request.user.profile)
+        update_user = UserUpdate(request.POST, instance=request.user)
         if update_user.is_valid() and img_prolile.is_valid():
             update_user.save()
             img_prolile.save()
@@ -31,5 +32,4 @@ def profile(request):
         update_user = UserUpdate(instance=request.user)
         data = {'img_prolile': img_prolile, 'update_user': update_user}
 
-    return render(request, 'users/profile.html', data)
-
+        return render(request, 'users/profile.html', data)

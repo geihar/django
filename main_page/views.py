@@ -19,7 +19,7 @@ class ShowNewsView(ListView):
     template_name = 'main_page/home.html'
     context_object_name = 'news'
     ordering = ['-date']
-    paginate_by = 1
+    paginate_by = 5
 
     def get_context_data(self, **kwards):
         context = super(ShowNewsView, self).get_context_data(**kwards)

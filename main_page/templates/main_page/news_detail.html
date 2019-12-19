@@ -14,7 +14,7 @@
             <div class="mt-2">
                 <span class="text-muted">Публикация: {{ object.date| date:"d E Y  в H:i:s" }}</span>
                 <p><b>Автор:
-                    <a href="{% url 'user_news' object.autor %}"> {{ object.autor }} </a>
+                    <a href="{% url 'user_all_news' object.autor %}"> {{ object.autor }} </a>
                 </b></p>
             </div>
 

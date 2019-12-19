@@ -12,6 +12,11 @@ urlpatterns = [
     path('login/', loginViews.LoginView.as_view(template_name='users/user.html'), name='log'),
     path('exit/', loginViews.LogoutView.as_view(template_name='users/exit.html'), name='exit'),
     path('pass_reset/', loginViews.PasswordResetView.as_view(template_name='users/pass_reset.html'), name='pass_reset'),
-    path('password_reset_done/<uidb64>/<token>/', loginViews.PasswordResetView.as_view(template_name='users/pass_reset.html'), name='pass_reset'),
+    path('password_reset_confirm/<uidb64>/<token>/',
+         loginViews.PasswordResetConfirmView.as_view(template_name='users/password_reset_confirm.html'), name='password_reset_confirm'),
+    path('password_reset_complete/',
+         loginViews.PasswordResetCompleteView.as_view(template_name='users/password_reset_complete.html'), name='password_reset_complete'),
+    path('password_reset_done/',
+         loginViews.PasswordResetDoneView.as_view(template_name='users/password_reset_done.html'), name='password_reset_done'),
     path('', include('main_page.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)  #убрать при деплое
