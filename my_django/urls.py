@@ -11,5 +11,7 @@ urlpatterns = [
     path('profile/', userViews.profile, name='profile'),
     path('login/', loginViews.LoginView.as_view(template_name='users/user.html'), name='log'),
     path('exit/', loginViews.LogoutView.as_view(template_name='users/exit.html'), name='exit'),
+    path('pass_reset/', loginViews.PasswordResetView.as_view(template_name='users/pass_reset.html'), name='pass_reset'),
+    path('password_reset_done/<uidb64>/<token>/', loginViews.PasswordResetView.as_view(template_name='users/pass_reset.html'), name='pass_reset'),
     path('', include('main_page.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)  #убрать при деплое

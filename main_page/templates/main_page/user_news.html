@@ -1,5 +1,6 @@
 {% extends 'main_page/main.html' %}
 {% block main_section %}
+    <h2>Все статьи автора:{{ view.kwargs.username }}</h2>
     {% for post in news %}
         <div class="alert alert-light">
             <h1>{{ post.title }}</h1>
@@ -15,7 +16,7 @@
                 <div class="mt-2">
                     <span class="text-muted">Публикация: {{ post.date| date:"d E Y  в H:i:s" }}</span>
                     <p><b>Автор:
-                        <a href="{% url 'user_all_news' post.autor %}"> {{ post.autor }} </a>
+                       <a href="{% url 'user_all_news' post.autor %}"> {{ post.autor }} </a>
                     </b></p>
                 </div>
             </div>
@@ -24,19 +25,19 @@
     {% endfor %}
     {% if is_paginated %}
         {% if page_obj.has_previous %}
-            <a href="/" class="btn btn-outline-secondary">Начало</a>
+            <a href="?page=1" class="btn btn-outline-secondary">Начало</a>
             <a href="?page={{ page_obj.previous_page_number }}" class="btn btn-outline-secondary">Предыдущая</a>
         {% endif %}
         {% for i in page_obj.paginator.page_range%}
             {% if i == page_obj.number %}
                 <button class="btn btn-secondary">{{ i }}</button>
             {% elif i > page_obj.number|add:'-3' and i < page_obj.number|add:'3' %}
-                <a href="?page={{ i }}" class="btn btn-outline-secondary">{{ i }}</a>
+                <a href="?page={{ page_obj.next_page_number }}" class="btn btn-outline-secondary">{{ i }}</a>
             {% endif %}
         {% endfor %}
         {% if page_obj.has_next %}
             <a href="?page={{ page_obj.next_page_number }}" class="btn btn-outline-secondary">Следующая</a>
-            <a href="?page={{ page_obj.paginator.num_pages}}" class="btn btn-outline-secondary">Последняя</a>
+            <a href="?page={{ page_obj.paginator.num_pages|add:'-1'}}" class="btn btn-outline-secondary">Последняя</a>
         {% endif %}
     {% endif %}
 {% endblock main_section %}

@@ -27,3 +27,17 @@ body{
     margin-right: 10px;
     margin-left: 20px;
 }
+footer{
+    padding: 30px;
+    background: #333a41;
+    color: #f1efef;
+    float: left;
+    width: 100%;
+    margin-top: 50px;
+}
+footer a{color: #788c9e}
+footer a:hover{color: #79b0e2}
+
+img{
+    max-width: 100%;
+}

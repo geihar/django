@@ -2,7 +2,7 @@
 {% block main_section %}
     <div class="alert alert-light">
         <h1>{{ object.title }}</h1>
-        <p>{{ object.text }}</p>
+        <p>{{ object.text|safe }}</p>
         <div class="row">
             <div>
                 {% if object.autor.profile.img %}
@@ -14,7 +14,7 @@
             <div class="mt-2">
                 <span class="text-muted">Публикация: {{ object.date| date:"d E Y  в H:i:s" }}</span>
                 <p><b>Автор:
-                    <mark> {{ object.autor }} </mark>
+                    <a href="{% url 'user_news' object.autor %}"> {{ object.autor }} </a>
                 </b></p>
             </div>
 
@@ -38,5 +38,5 @@
     </div>
     <div class="p-3 mb-1">
         <img src="https://images.ua.prom.st/1768438863_w640_h640_karty-dlya-pokera.jpg" class="img-thumbnail">
-    </div>
+
 {% endblock aside_section %}
