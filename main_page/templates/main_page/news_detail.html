@@ -1,0 +1,42 @@
+{% extends 'main_page/main.html' %}
+{% block main_section %}
+    <div class="alert alert-light">
+        <h1>{{ object.title }}</h1>
+        <p>{{ object.text }}</p>
+        <div class="row">
+            <div>
+                {% if object.autor.profile.img %}
+                    <img src="{{ object.autor.profile.img.url }}" alt="object.autor" class="user_img">
+                {% else %}
+                    <img src="/imagines/1.jpg" alt="object.autor" class="user_img">
+                {% endif %}
+            </div>
+            <div class="mt-2">
+                <span class="text-muted">Публикация: {{ object.date| date:"d E Y  в H:i:s" }}</span>
+                <p><b>Автор:
+                    <mark> {{ object.autor }} </mark>
+                </b></p>
+            </div>
+
+        </div>
+        {% if object.autor == user %}
+            <hr>
+            <a class="btn btn-outline-warning" href="{% url 'update_news' object.id %}">Обновить новость</a>
+            <a class="btn btn-outline-warning" href="{% url 'delete_news' object.id %}">Удалить новость</a>
+        {% endif %}
+
+    </div>
+{% endblock main_section %}
+
+{% block aside_section %}
+    <div class="p-3 ">
+        <h3><b>Lorem ipsum dolor.</b></h3>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A amet ducimus illum impedit incidunt </p>
+        <a href="" target="_blank">
+            <button class="btn btn-danger"> Danger</button>
+        </a>
+    </div>
+    <div class="p-3 mb-1">
+        <img src="https://images.ua.prom.st/1768438863_w640_h640_karty-dlya-pokera.jpg" class="img-thumbnail">
+    </div>
+{% endblock aside_section %}

@@ -14,8 +14,8 @@ class Profile(models.Model):
 
         img = Image.open(self.img.path)
 
-        if img.height > 64 or img.width > 64:
-            resize = (64, 64)
+        if img.height > 128 or img.width > 128:
+            resize = (128, 128)
             img.thumbnail(resize)
             img.save(self.img.path)
 

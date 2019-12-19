@@ -1,18 +1,28 @@
 {% extends 'main_page/main.html' %}
 {% block main_section %}
     {% for post in news %}
-    <div class="alert alert-light" >
-        <h1>{{ post.title }}</h1>
-        <p>{{ post.text }}</p>
-        <span class="text-muted">Публикация: {{ post.date| date:"j F Y, время H:i:s" }}</span>
-        {% if post.autor %}
-            <p><b>Автор:<mark> {{ post.autor }} </mark></b></p>
-            {% else %}
-            <p><b>Автор:<mark> Админ </mark></b></p>
-        {% endif %}
-    </div>
+        <div class="alert alert-light">
+            <h1>{{ post.title }}</h1>
+            <p>{{ post.text }}</p>
+            <div class="row">
+                <div>
+                    {% if post.autor.profile.img %}
+                        <img src="{{ post.autor.profile.img.url }}" alt="post.autor" class="user_img">
+                    {% else %}
+                        <img src="/imagines/1.jpg" alt="post.autor" class="user_img">
+                    {% endif %}
+                </div>
+                <div class="mt-2">
+                    <span class="text-muted">Публикация: {{ post.date| date:"d E Y  в H:i:s" }}</span>
+                    <p><b>Автор:
+                        <mark> {{ post.autor }} </mark>
+                    </b></p>
+                </div>
+            </div>
+            <a href="{% url 'full_news' post.id %}" class="btn btn-outline-secondary">Читать далее</a>
+        </div>
     {% endfor %}
-{% endblock main_section%}
+{% endblock main_section %}
 
 {% block aside_section %}
     <div class="p-3 ">
@@ -25,4 +35,4 @@
     <div class="p-3 mb-1">
         <img src="https://images.ua.prom.st/1768438863_w640_h640_karty-dlya-pokera.jpg" class="img-thumbnail">
     </div>
-{% endblock aside_section%}
+{% endblock aside_section %}

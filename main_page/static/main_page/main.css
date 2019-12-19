@@ -18,3 +18,12 @@ body{
     color: #b38a22;
     margin-bottom: 10px;
 }
+.user_img{
+    height: 64px;
+    width: 64px;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+    margin-right: 10px;
+    margin-left: 20px;
+}
