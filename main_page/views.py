@@ -11,12 +11,13 @@ def main_page(request):
 
 
 def news(request):
-    return render(request, 'main_page/news.html')
+    data = {'news': News.objects.all()}
+    return render(request, 'main_page/news.html', data)
 
 
 class ShowNewsView(ListView):
     model = News
-    template_name = 'main_page/home.html'
+    template_name = 'main_page/news.html'
     context_object_name = 'news'
     ordering = ['-date']
     paginate_by = 5

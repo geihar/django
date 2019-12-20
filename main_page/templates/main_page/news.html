@@ -1,16 +1,57 @@
 {% extends 'main_page/main.html' %}
 {% block main_section %}
-    <h1>News</h1>
+    {% for post in news %}
+        <div class="alert alert-light">
+            <h1>{{ post.title }}</h1>
+            <p>{{ post.text| striptags|truncatechars:200 }}</p>
+            <div class="row">
+                <div>
+                    {% if post.autor.profile.img %}
+                        <img src="{{ post.autor.profile.img.url }}" alt="post.autor" class="user_img">
+                    {% else %}
+                        <img src="/imagines/1.jpg" alt="post.autor" class="user_img">
+                    {% endif %}
+                </div>
+                <div class="mt-2">
+                    <span class="text-muted">Публикация: {{ post.date| date:"d E Y  в H:i:s" }}</span>
+                    <p><b>Автор:
+                        <a href="{% url 'user_all_news' post.autor %}"> {{ post.autor }} </a>
+                    </b></p>
+                </div>
+            </div>
+            <a href="{% url 'full_news' post.id %}" class="btn btn-outline-secondary">Читать далее</a>
+        </div>
+    {% endfor %}
+    {% if is_paginated %}
+        {% if page_obj.has_previous %}
+            <a href="/" class="btn btn-outline-secondary">Начало</a>
+            <a href="?page={{ page_obj.previous_page_number }}" class="btn btn-outline-secondary">Предыдущая</a>
+        {% endif %}
+        {% for i in page_obj.paginator.page_range%}
+            {% if i == page_obj.number %}
+                <button class="btn btn-secondary">{{ i }}</button>
+            {% elif i > page_obj.number|add:'-3' and i < page_obj.number|add:'3' %}
+                <a href="?page={{ i }}" class="btn btn-outline-secondary">{{ i }}</a>
+            {% endif %}
+        {% endfor %}
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}" class="btn btn-outline-secondary">Следующая</a>
+            <a href="?page={{ page_obj.paginator.num_pages}}" class="btn btn-outline-secondary">Последняя</a>
+        {% endif %}
+    {% endif %}
 {% endblock main_section %}
+
 {% block aside_section %}
-    <div class="p-3 ">
-        <h3><b>Lorem ipsum dolor.</b></h3>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A amet ducimus illum impedit incidunt </p>
-        <a href="" target="_blank">
-            <button class="btn btn-danger"> Danger</button>
-        </a>
-    </div>
-    <div class="p-3 mb-1">
-        <img src="https://images.ua.prom.st/1768438863_w640_h640_karty-dlya-pokera.jpg" class="img-thumbnail">
-    </div>
+        <div class="card ">
+            <div class="card-header">
+                <h5 class="card-title">Имя карточки</h5>
+            </div>
+            <div class="embed-responsive embed-responsive-16by9">
+                <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/T-TYyGL9Qjg" allowfullscreen=""></iframe>
+            </div>
+            <div class="card-body">
+                <p class="card-text">Далеко-далеко за словесными горами в стране, гласных и согласных живут рыбные тексты.</p>
+                <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+        </div>
 {% endblock aside_section %}
