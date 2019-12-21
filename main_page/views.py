@@ -1,18 +1,14 @@
 from django.shortcuts import render, get_object_or_404
-from .models import News
+from .models import News, AsideNews
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.models import User
 
 
 def main_page(request):
-    data = {'news': News.objects.all()}
+    data = {'aside': AsideNews.objects.order_by("text")[:4]}
     return render(request, 'main_page/home.html', data)
 
-
-def news(request):
-    data = {'news': News.objects.all()}
-    return render(request, 'main_page/news.html', data)
 
 
 class ShowNewsView(ListView):
@@ -24,6 +20,7 @@ class ShowNewsView(ListView):
 
     def get_context_data(self, **kwards):
         context = super(ShowNewsView, self).get_context_data(**kwards)
+        context['aside'] = AsideNews.objects.order_by("url")[:3]
         context['title'] = 'Главная страница блога'
         return context
 
@@ -36,7 +33,8 @@ class ShowUserNews(ListView):
 
     def get_context_data(self, **kwards):
         context = super(ShowUserNews, self).get_context_data(**kwards)
-        context['title'] = 'Главная страница блога'
+        context['title'] = 'Новости пользователя'
+        context['aside'] = AsideNews.objects.order_by("autor")[:3]
         return context
 
     def get_queryset(self):
@@ -50,6 +48,7 @@ class NewsDetailView(DetailView):
     def get_context_data(self, **kwards):
         context = super(NewsDetailView, self).get_context_data(**kwards)
         context['title'] = News.objects.filter(pk=self.kwargs['pk']).first()
+        context['aside'] = AsideNews.objects.order_by("title")[:3]
         return context
 
 
@@ -86,3 +85,4 @@ class DeleteNewsView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         if self.request.user == news.autor:
             return True
         return False
+

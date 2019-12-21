@@ -42,16 +42,18 @@
 {% endblock main_section %}
 
 {% block aside_section %}
-        <div class="card ">
+    {% for post in aside%}
+        <div class="card mb-5 ">
             <div class="card-header">
-                <h5 class="card-title">Имя карточки</h5>
+                <h5 class="card-title">{{ post.title }}</h5>
             </div>
             <div class="embed-responsive embed-responsive-16by9">
-                <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/T-TYyGL9Qjg" allowfullscreen=""></iframe>
+                {{ post.iframe|safe }}
             </div>
             <div class="card-body">
-                <p class="card-text">Далеко-далеко за словесными горами в стране, гласных и согласных живут рыбные тексты.</p>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
+                <p>{{ post.text| striptags|truncatechars:80 }}</p>
+                <a href="{{ post.url }}" class="btn btn-outline-secondary">Читать далее</a>
             </div>
         </div>
+    {% endfor %}
 {% endblock aside_section %}
