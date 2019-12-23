@@ -8,14 +8,18 @@
   </div>
 {% endblock main_section%}
 {% block aside_section %}
-    <div class="p-3 ">
-        <h3><b>Lorem ipsum dolor.</b></h3>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A amet ducimus illum impedit incidunt </p>
-        <a href="" target="_blank">
-            <button class="btn btn-danger"> Danger</button>
-        </a>
-    </div>
-    <div class="p-3 mb-1">
-        <img src="https://images.ua.prom.st/1768438863_w640_h640_karty-dlya-pokera.jpg" class="img-thumbnail">
-    </div>
-{% endblock aside_section%}
+    {% for post in aside%}
+        <div class="card mb-5 ">
+            <div class="card-header">
+                <h5 class="card-title">{{ post.title }}</h5>
+            </div>
+            <div class="embed-responsive embed-responsive-16by9">
+                {{ post.iframe|safe }}
+            </div>
+            <div class="card-body">
+                <p>{{ post.text| striptags|truncatechars:80 }}</p>
+                <a href="{{ post.url }}" class="btn btn-outline-secondary">Читать далее</a>
+            </div>
+        </div>
+    {% endfor %}
+{% endblock aside_section %}

@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .forms import UserRegForm, UserUpdate, ProfileImg
+from main_page.models import AsideNews
 
 
 def registration(request):
@@ -14,7 +15,8 @@ def registration(request):
             return redirect('log')
     else:
         form = UserRegForm()
-    return render(request, 'users/registration.html', {'form': form, 'title': 'Регистрация пользователя'})
+        data = {'form': form, 'title': 'Регистрация пользователя', 'aside': AsideNews.objects.order_by("text")[:2]}
+    return render(request, 'users/registration.html', data)
 
 
 @login_required
@@ -30,6 +32,6 @@ def profile(request):
     else:
         img_prolile = ProfileImg(instance=request.user.profile)
         update_user = UserUpdate(instance=request.user)
-        data = {'img_prolile': img_prolile, 'update_user': update_user}
+        data = {'img_prolile': img_prolile, 'update_user': update_user, 'aside': AsideNews.objects.order_by("title")[:4]}
 
         return render(request, 'users/profile.html', data)

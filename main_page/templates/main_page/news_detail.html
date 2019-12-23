@@ -1,8 +1,11 @@
 {% extends 'main_page/main.html' %}
 {% block main_section %}
     <div class="alert alert-light">
+        {%  if object.img %}
+     <img height="500px" src="{{ object.img|safe }}" >
+    {% endif %}
         <h1>{{ object.title }}</h1>
-        <p>{{ object.text|safe }}</p>
+        <p>{{ object.text|safe}}</p>
         <div class="row">
             <div>
                 {% if object.autor.profile.img %}

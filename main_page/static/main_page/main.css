@@ -27,6 +27,11 @@ body{
     margin-right: 10px;
     margin-left: 20px;
 }
+.bio_img{
+    height: 150px;
+    width: 248px;
+
+}
 footer{
     padding: 30px;
     background: #333a41;

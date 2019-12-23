@@ -41,58 +41,60 @@
        </ol>
    </div>
 
-  <div class="container mt-5 ">
+   <div class="container mt-5 ">
 
-    <!-- Three columns of text below the carousel -->
-    <div class="row">
-      <div class="col-lg-4">
-        <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 140x140"><title>Placeholder</title><rect fill="#777" width="100%" height="100%"></rect><text fill="#777" dy=".3em" x="50%" y="50%">140x140</text></svg>
-        <h2>Heading</h2>
-        <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna.</p>
-        <p><a class="btn btn-secondary" href="#" role="button">View details »</a></p>
-      </div><!-- /.col-lg-4 -->
-      <div class="col-lg-4">
-        <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 140x140"><title>Placeholder</title><rect fill="#777" width="100%" height="100%"></rect><text fill="#777" dy=".3em" x="50%" y="50%">140x140</text></svg>
-        <h2>Heading</h2>
-        <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh.</p>
-        <p><a class="btn btn-secondary" href="#" role="button">View details »</a></p>
-      </div><!-- /.col-lg-4 -->
-      <div class="col-lg-4">
-        <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 140x140"><title>Placeholder</title><rect fill="#777" width="100%" height="100%"></rect><text fill="#777" dy=".3em" x="50%" y="50%">140x140</text></svg>
-        <h2>Heading</h2>
-        <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-        <p><a class="btn btn-secondary" href="#" role="button">View details »</a></p>
-      </div><!-- /.col-lg-4 -->
-    </div><!-- /.row -->
-
-
-    <!-- START THE FEATURETTES -->
-
-    <hr class="featurette-divider">
-
-    <div class="row featurette">
-      <div class="col-md-7">
-        <h2 class="featurette-heading">First featurette heading. <span class="text-muted">It’ll blow your mind.</span></h2>
-        <p class="lead">text.</p>
-      </div>
-      <div class="col-md-5">
-        <img class="d-block w-100" src="https://i.pinimg.com/originals/2b/a6/6f/2ba66ffc364d5de78dfe06793fe54732.jpg">
-      </div>
+       <div class="row">
+           {% for i in bio %}
+               <div class="col-lg-4">
+               <img src="{{ i.img|safe }}" alt="i.autor" class="bio_img">
+               <h2>{{ i.title }}</h2>
+               <p>{{ i.text|striptags|truncatechars:100 }}</p>
+               <a class="btn btn-secondary" href="{% url 'full_biografi' i.id %}" role="button">Читать подробнее »</a>
+               </div>
+           {% endfor %}
+       </div>
     </div>
 
     <hr class="featurette-divider">
 
-    <div class="row featurette">
-      <div class="col-md-7 order-md-2">
-        <h2 class="featurette-heading">Oh yeah, it’s that good. <span class="text-muted">See for yourself.</span></h2>
-        <p class="lead">text</p>
+    {% for post in news %}
+
+      <div class="row featurette mt-5 alert alert-light">
+          <div class="col-md-7">
+              <h2 class="featurette-heading">{{ post.title }} </h2>
+              <p class="lead">{{ post.text| striptags|truncatechars:200 }}</p>
+          </div>
+          <div class="col-md-5 ">
+              <img class="d-block w-100" src="{{ post.img|safe }}">
+          </div>
+
+          <a href="{% url 'full_main_news' post.id %}" class="btn btn-secondary">Читать далее</a>
       </div>
-      <div class="col-md-5 order-md-1">
-        <img  class="d-block w-100" src="https://i.pinimg.com/originals/2b/a6/6f/2ba66ffc364d5de78dfe06793fe54732.jpg">
-      </div>
-    </div>
-   <hr class="featurette-divider">
-  </div>
+    {% endfor %}
+
+{#    <div class="row featurette">#}
+{#      <div class="col-md-7">#}
+{#        <h2 class="featurette-heading">Руководство для начинающих кардистов </h2>#}
+{#        <p class="lead">text.</p>#}
+{#      </div>#}
+{#      <div class="col-md-5">#}
+{#        <img class="d-block w-100" src="https://i.pinimg.com/originals/2b/a6/6f/2ba66ffc364d5de78dfe06793fe54732.jpg">#}
+{#      </div>#}
+{#    </div>#}
+{##}
+{#    <hr class="featurette-divider">#}
+
+{#    <div class="row featurette">#}
+{#      <div class="col-md-7 order-md-2">#}
+{#        <h2 class="featurette-heading">Oh yeah, it’s that good. <span class="text-muted">See for yourself.</span></h2>#}
+{#        <p class="lead">text</p>#}
+{#      </div>#}
+{#      <div class="col-md-5 order-md-1">#}
+{#        <img  class="d-block w-100" src="https://i.pinimg.com/originals/2b/a6/6f/2ba66ffc364d5de78dfe06793fe54732.jpg">#}
+{#      </div>#}
+{#    </div>#}
+{#   <hr class="featurette-divider">#}
+
 
 
 </body>

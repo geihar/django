@@ -35,3 +35,25 @@ sort(a)
 # python -m venv venv
 #
 # venv\Scripts\activate.bat
+
+
+
+
+
+{#      {% for post in news %}#}
+{#          {%  if news.index %}#}
+{#          <div class="row featurette mt-5">#}
+{#          <div class="col-md-7">#}
+{#              <h2 class="featurette-heading">{{ post.title }} </h2>#}
+{#              <p class="lead">{{ post.text| striptags|truncatechars:200 }}</p>#}
+{#          </div>#}
+{#          <div class="col-md-5 ">#}
+{#              <img class="d-block w-100" src="{{ post.img|safe }}">#}
+{#          </div>#}
+{##}
+{#          <a href="{% url 'full_news' post.id %}" class="btn btn-outline-secondary">Читать далее</a>#}
+{#          <hr class="featurette-divider">#}
+{##}
+{#          {% endif %}#}
+{#      {% endfor %}#}
+

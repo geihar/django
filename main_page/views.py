@@ -1,14 +1,49 @@
 from django.shortcuts import render, get_object_or_404
-from .models import News, AsideNews
+from .models import News, AsideNews,MainNews, Biografi
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.models import User
 
 
-def main_page(request):
-    data = {'aside': AsideNews.objects.order_by("text")[:4]}
-    return render(request, 'main_page/home.html', data)
+# def main_page(request):
+#     data = {'aside': AsideNews.objects.order_by("text")[:4]}
+#     return render(request, 'main_page/home.html', data)
 
+
+class ShowMainView(ListView):
+    model = MainNews
+    template_name = 'main_page/home.html'
+    context_object_name = 'news'
+    ordering = ['-date']
+    paginate_by = 3
+
+    def get_context_data(self, **kwards):
+        context = super(ShowMainView, self).get_context_data(**kwards)
+        context['aside'] = AsideNews.objects.order_by("url")[:4]
+        context['bio'] = Biografi.objects.order_by("-date")[:3]
+        context['title'] = 'Главная страница '
+        return context
+
+
+class BioDetailView(DetailView):
+    model = Biografi
+    template_name = 'main_page/news_detail.html'
+
+    def get_context_data(self, **kwards):
+        context = super(BioDetailView, self).get_context_data(**kwards)
+        context['title'] = Biografi.objects.filter(pk=self.kwargs['pk']).first()
+        context['aside'] = AsideNews.objects.order_by("title")[:3]
+        return context
+
+class MainNewsDetailView(DetailView):
+    model = MainNews
+    template_name = 'main_page/news_detail.html'
+
+    def get_context_data(self, **kwards):
+        context = super(MainNewsDetailView, self).get_context_data(**kwards)
+        context['title'] = MainNews.objects.filter(pk=self.kwargs['pk']).first()
+        context['aside'] = AsideNews.objects.order_by("title")[:3]
+        return context
 
 
 class ShowNewsView(ListView):
