@@ -125,9 +125,13 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'supppor718@gmail.com'
-EMAIL_HOST_PASSWORD = 'weter212'
+EMAIL_HOST_USER = 'www@gmail.com'
+EMAIL_HOST_PASSWORD = '123456'
 
 
+try:
+    from local_settings import*
+except ImportError:
+    print("local_settings is not defined")
 
 
