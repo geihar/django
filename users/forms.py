@@ -19,11 +19,13 @@ class UserUpdate(forms.ModelForm):
         model = User
         fields = ['username', 'email']
 
+
 class ProfileImg(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(ProfileImg, self).__init__(*args, **kwargs)
         self.fields['img'].label = 'Изображение профиля'
+
     class Meta:
         model = Profile
         fields = ['img']

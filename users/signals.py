@@ -9,5 +9,5 @@ def create_profile(sender, instance, created, **kwarde):
         Profile.objects.create(user=instance)
 
 @receiver(post_save, sender=User)
-def ssave_profile(sender, instance, **kwarde):
+def save_profile(sender, instance, **kwarde):
     instance.profile.save()

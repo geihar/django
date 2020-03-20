@@ -14,11 +14,12 @@ SECRET_KEY = '=xm737@d_8zb@$9e6wrf)rtd%7+an8h2v3+29q%68)l76r%dtm'
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
+INTERNAL_IPS = ['127.0.0.1', ]
 
 # Application definition
 
 INSTALLED_APPS = [
+    'debug_toolbar',
     'users.apps.UsersConfig',
     'main_page.apps.MainPageConfig',
     'django.contrib.admin',
@@ -28,6 +29,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'crispy_forms',
+    'rest_framework',
+
 ]
 
 MIDDLEWARE = [
@@ -38,6 +41,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
 ROOT_URLCONF = 'my_django.urls'

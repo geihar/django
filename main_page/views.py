@@ -3,6 +3,10 @@ from .models import News, AsideNews,MainNews, Biografi
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.models import User
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
+from .serializers import NewsViewSerialaizers
 
 
 # def main_page(request):
@@ -121,3 +125,30 @@ class DeleteNewsView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
             return True
         return False
 
+
+class ApiNewsView(APIView):
+
+    def get (self, request):
+        news = News.objects.all()
+        serializer = NewsViewSerialaizers(news, many=True)
+        return Response(serializer.data)
+
+    def post(self, request):
+        serializer = NewsViewSerialaizers(data=request.data)
+        if serializer.is_valid():
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class ApiNewsDetailView(APIView):
+
+    def get(self, request, pk):
+        new =  get_object_or_404(News, pk=pk)
+        serializer = NewsViewSerialaizers(new)
+        return Response(serializer.data)
+
+    def delete(self, request, pk):
+        new = get_object_or_404(News, pk=pk)
+        serializer = NewsViewSerialaizers(new)
+        data = serializer.data
+        new.delete()
+        return Response(data)
