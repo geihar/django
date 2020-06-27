@@ -77,6 +77,18 @@ DATABASES = {
 }
 
 
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.postgresql_psycopg2",
+#         "NAME": "postgres",
+#         "USER": "postgres",
+#         "PASSWORD": "postgres",
+#         "HOST": "localhost",
+#         "PORT": 5432,
+#         "CONN_MAX_AGE": 0,
+#     }
+# }
+
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
 
@@ -125,13 +137,14 @@ LOGIN_REDIRECT_URL = 'main_page'
 
 LOGIN_URL = "log"
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'www@gmail.com'
-EMAIL_HOST_PASSWORD = '123456'
-
+EMAIL_HOST_USER = 'test@gmail.com'
+EMAIL_HOST_PASSWORD = 'geqfeefwefwefwefwef'
 
 try:
     from local_settings import*

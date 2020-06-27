@@ -13,6 +13,7 @@ body{
     -webkit-box-shadow: 0 2px 3px 0 rgba(74,74,74,21);
     -moz-box-shadow: 0 2px 3px 0 rgba(74,74,74,21);
     box-shadow: 0 2px 3px 0 rgba(74,74,74,21);
+
 }
 .form-section>h2{
     color: #b38a22;
@@ -31,6 +32,9 @@ body{
     height: 150px;
     width: 248px;
 
+}
+.bg{
+    max-height: 60%;
 }
 footer{
     padding: 30px;

@@ -1,0 +1,14 @@
+{% extends 'main_page/main.html' %}
+{% block main_section %}
+    <div class="form-section">
+        <h2>Удаление статьи "{{ object.title }}"</h2>
+        <p>{{ object.text }}</p>
+        <form method="POST">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-outline-danger">Удалить статью ?</button>
+            <a class="btn btn-outline-warning" href="{% url 'full_news' object.id %}">Нет,
+                отмена</a>
+        </form>
+    </div>
+{% endblock main_section %}
+{% include 'main_page/include/aside.html' %}

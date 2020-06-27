@@ -9,11 +9,6 @@ from rest_framework import status
 from .serializers import NewsViewSerialaizers
 
 
-# def main_page(request):
-#     data = {'aside': AsideNews.objects.order_by("text")[:4]}
-#     return render(request, 'main_page/home.html', data)
-
-
 class ShowMainView(ListView):
     model = MainNews
     template_name = 'main_page/home.html'
@@ -26,6 +21,7 @@ class ShowMainView(ListView):
         context['aside'] = AsideNews.objects.order_by("url")[:4]
         context['bio'] = Biografi.objects.order_by("-date")[:3]
         context['title'] = 'Главная страница '
+        context['main'] = True
         return context
 
 
@@ -61,6 +57,7 @@ class ShowNewsView(ListView):
         context = super(ShowNewsView, self).get_context_data(**kwards)
         context['aside'] = AsideNews.objects.order_by("url")[:3]
         context['title'] = 'Главная страница блога'
+        context['new'] = True
         return context
 
 

@@ -1,0 +1,37 @@
+{% extends 'main_page/main.html' %}
+{% block main_section %}
+    <div class="alert alert-light">
+        {% if object.img %}
+            <img height="500px" src="{{ object.img|safe }}">
+        {% endif %}
+        <h1>{{ object.title }}</h1>
+        <p>{{ object.text|safe }}</p>
+        <div class="row">
+            <div>
+                {% if object.autor.profile.img %}
+                    <img src="{{ object.autor.profile.img.url }}" alt="object.autor"
+                         class="user_img">
+                {% else %}
+                    <img src="/imagines/1.jpg" alt="object.autor" class="user_img">
+                {% endif %}
+            </div>
+            <div class="mt-2">
+                <span class="text-muted">Публикация: {{ object.date| date:"d E Y  в H:i:s" }}</span>
+                <p><b>Автор:
+                    <a href="{% url 'user_all_news' object.autor %}"> {{ object.autor }} </a>
+                </b></p>
+            </div>
+
+        </div>
+        {% if object.autor == user %}
+            <hr>
+            <a class="btn btn-outline-warning" href="{% url 'update_news' object.id %}">Обновить
+                новость</a>
+            <a class="btn btn-outline-warning" href="{% url 'delete_news' object.id %}">Удалить
+                новость</a>
+        {% endif %}
+
+    </div>
+{% endblock main_section %}
+
+{% include 'main_page/include/aside.html' %}

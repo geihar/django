@@ -1,0 +1,14 @@
+{% for post in aside%}
+        <div class="card mb-5 ">
+            <div class="card-header">
+                <h5 class="card-title">{{ post.title }}</h5>
+            </div>
+            <div class="embed-responsive embed-responsive-16by9">
+                {{ post.iframe|safe }}
+            </div>
+            <div class="card-body">
+                <p>{{ post.text| striptags|truncatechars:80 }}</p>
+                <a href="{{ post.url }}" class="btn btn-outline-secondary">Читать далее</a>
+            </div>
+        </div>
+    {% endfor %}

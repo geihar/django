@@ -15,7 +15,8 @@ def registration(request):
             return redirect('log')
     else:
         form = UserRegForm()
-        data = {'form': form, 'title': 'Регистрация пользователя', 'aside': AsideNews.objects.order_by("text")[:2]}
+
+    data = {'form': form, 'title': 'Регистрация пользователя', 'aside': AsideNews.objects.order_by("text")[:2]}
     return render(request, 'users/registration.html', data)
 
 
@@ -32,6 +33,6 @@ def profile(request):
     else:
         img_prolile = ProfileImg(instance=request.user.profile)
         update_user = UserUpdate(instance=request.user)
-        data = {'img_prolile': img_prolile, 'update_user': update_user, 'aside': AsideNews.objects.order_by("title")[:4]}
+        data = {'img_prolile': img_prolile, 'update_user': update_user, 'aside': AsideNews.objects.order_by("title")[:2]}
 
         return render(request, 'users/profile.html', data)
