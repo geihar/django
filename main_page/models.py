@@ -10,6 +10,10 @@ class News(models.Model):
     date = models.DateTimeField(default=timezone.now)
     autor = models.ForeignKey(User, on_delete=models.CASCADE)
 
+    class Meta:
+        verbose_name = "Новость"
+        verbose_name_plural = "Новости"
+
     def __str__(self):
         return self.title
 
@@ -24,6 +28,10 @@ class AsideNews(models.Model):
     url = models.TextField()
     autor = models.ForeignKey(User, on_delete=models.CASCADE)
 
+    class Meta:
+        verbose_name = "Новость"
+        verbose_name_plural = "Боковые новости"
+
 
 class MainNews(models.Model):
     title = models.CharField(max_length=100)
@@ -31,6 +39,10 @@ class MainNews(models.Model):
     date = models.DateTimeField(default=timezone.now)
     img = models.TextField()
     autor = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    class Meta:
+        verbose_name = "Новость"
+        verbose_name_plural = "Главные новости"
 
     def __str__(self):
         return self.title
@@ -45,6 +57,10 @@ class Biografi(models.Model):
     date = models.DateTimeField(default=timezone.now)
     img = models.TextField()
     autor = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    class Meta:
+        verbose_name = "Биографии"
+        verbose_name_plural = "Биографии"
 
     def __str__(self):
         return self.title

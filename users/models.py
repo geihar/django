@@ -7,6 +7,10 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     img = models.ImageField(default='1.jpg', upload_to='user_images')
 
+    class Meta:
+        verbose_name = "Профиль"
+        verbose_name_plural = "Профили"
+
     def __str__(self):
         return f'Профиль пользователя {self.user.username}'
 
